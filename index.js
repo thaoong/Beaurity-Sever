@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 })
 
 //const { MongoClient, ObjectId } = require("mongodb");
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://beaurity:nhungconbao@beaurity.4nyk9ea.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
   serverApi: {
@@ -179,7 +179,7 @@ app.delete("/categories/:id", cors(), async (req, res) => {
 });
 
 //Thông tin của Giỏ hàng
-const session = require('express-session');
+const session = require('cookie-session');
 const { hasSubscribers } = require('diagnostics_channel');
 app.use(session({ secret: "Shh, its a secret!" }));
 app.get("/contact", cors(), (req, res) => {
