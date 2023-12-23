@@ -14,7 +14,7 @@ app.use(express.urlencoded({ limit: '10mb' }));
 app.use(cookieParser());
 
 const cors = require("cors");
-const allowedOrigins = ['http://localhost:4001', 'http://localhost:4002', 'https://beaurity-admin.vercel.app','https://beaurity-admin.netlify.app']
+const allowedOrigins = ['http://localhost:4001', 'http://localhost:4002', 'https://beaurity-admin.vercel.app/','https://beaurity-admin.netlify.app/']
 app.use(cors({
   origin: function(origin, callback) {
       if (!origin) return callback(null, true);
