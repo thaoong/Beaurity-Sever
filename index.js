@@ -14,17 +14,24 @@ app.use(express.urlencoded({ limit: '10mb' }));
 app.use(cookieParser());
 
 const cors = require("cors");
-const allowedOrigins = ['http://localhost:4001', 'http://localhost:4002', 'https://beaurity-admin.vercel.app/','https://beaurity-admin.netlify.app/']
-app.use(cors({
-  origin: function(origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-          var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-          return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-  }
-}));
+const allowedOrigins = ['http://localhost:4001', 'http://localhost:4002', 'https://beaurity-admin.vercel.app','https://beaurity-admin.netlify.app'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+// Enable CORS for all routes
+app.use(cors(corsOptions));
+
+// Your API routes go here
 app.listen(port, () => {
   console.log(`My Service start at port ${port}`)
 })
